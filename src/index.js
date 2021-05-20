@@ -23,6 +23,8 @@ app.engine('hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // Middlewares
+app.use(cookieParser('secretmeubleria'));
+app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash())
 app.use(morgan('dev'))
 app.use(express.urlencoded({extended: false}));
