@@ -1,0 +1,39 @@
+<div class="row">
+   <div class="col-md-8 mx-auto">
+      <h2> Editar Producto</h2>
+      <div class="card p-2 shadow-lg bg-white rounded">
+         <div class="card-body">
+            <form action="/Productos/color/edit/{{color.id}}" method="POST">
+               <div class="form-group">
+                  <label for="id">id:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="id"
+                     name="id"
+                     value="{{color.id}}"
+                     placeholder="Ingrese el id del color"
+                     required
+                     disabled
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="color">color:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="color"
+                     name="color"
+                     value="{{color.color}}"
+                     placeholder="Ingrese el nombre del color"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <input type="submit" class="btn btn-success btn-block" value="Guardar">
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

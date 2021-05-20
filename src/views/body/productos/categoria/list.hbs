@@ -1,0 +1,23 @@
+<a class="btn btn-outline-primary mb-4" href="/Productos/categoria/add"><i class="fas fa-plus-circle"></i> Agregar Nuevo Categoria</a>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th class="text-uppercase text-center" scope="col">id</th>
+      <th class="text-uppercase text-center" scope="col">categoria</th>
+      <th class="text-uppercase text-center" scope="col">descripcion</th>
+      <th class="text-uppercase text-center" scope="col">Editar</th>
+      <th class="text-uppercase text-center" scope="col">eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each categoria}}
+    <tr>
+      <th class="align-middle text-center" scope="row">{{id}}</th>
+      <td class="align-middle text-center">{{nombre}}</td>
+      <td class="align-middle text-center">{{descripcion}}</td>
+      <td class="align-middle text-center"><a class="text-success" style="font-size: 2rem;" href="/Productos/categoria/edit/{{id}}"><i class="fas fa-edit"></i></a></td>
+      <td class="align-middle text-center"><a class="text-danger" style="font-size: 2rem;" href="/Productos/categoria/delete/{{id}}"><i class="fas fa-trash"></i></a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<a class="btn btn-outline-primary mb-4" href="/Productos/color/add"><i class="fas fa-plus-circle"></i> Agregar Nuevo Color</a>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th class="text-uppercase text-center" scope="col">id</th>
+      <th class="text-uppercase text-center" scope="col">color</th>
+      <th class="text-uppercase text-center" scope="col">Editar</th>
+      <th class="text-uppercase text-center" scope="col">eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each colores}}
+    <tr>
+      <th class="align-middle text-center" scope="row">{{id}}</th>
+      <td class="align-middle text-center">{{color}}</td>
+      <td class="align-middle text-center"><a class="text-success" style="font-size: 2rem;" href="/Productos/color/edit/{{id}}"><i class="fas fa-edit"></i></a></td>
+      <td class="align-middle text-center"><a class="text-danger" style="font-size: 2rem;" href="/Productos/color/delete/{{id}}"><i class="fas fa-trash"></i></a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
