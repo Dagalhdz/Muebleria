@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const flash = require('connect-flash');
 
 //Inicializacion
 const app = express();
@@ -22,6 +23,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // Middlewares
+app.use(flash())
 app.use(morgan('dev'))
 app.use(express.urlencoded({extended: false}));
 

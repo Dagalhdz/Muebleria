@@ -38,6 +38,7 @@ router.post('/add', async (req, res) => {
          .input('existencia', existencia)
          .input('descripcion', description)
          .execute('procedure_newProducto');
+      req.flash('sucess', 'Se ha agregado el producto Correctamente')
       res.redirect('/productos', )
    }
    catch (error){
@@ -50,7 +51,8 @@ router.get('/delete/:id', async (req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
       .input('id', id)
-      .execute('procedure_DeleteProductById')
+      .execute('procedure_DeleteProductById');
+   req.flash('sucess', 'Se ha aliminado el producto Correctamente');
    res.redirect('/productos');
 })
 
@@ -97,6 +99,7 @@ router.post('/edit/:id', async (req, res) => {
          .input('existencia', existencia)
          .input('descripcion', description)
          .execute('procedure_UpdateProduct');
+         req.flash('sucess', 'Se ha Editado el producto Correctamente');
       res.redirect('/productos', )
    }
     catch (error){
