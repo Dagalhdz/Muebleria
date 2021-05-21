@@ -1,0 +1,44 @@
+
+<div class="row">
+   <div class="col-md-8 mx-auto">
+      <h2> Nuevo Proveedor-Producto</h2>
+      <div class="card p-2 shadow-lg bg-white rounded">
+         <div class="card-body">
+            <form action="/proveedores/producto/add" method="POST">
+               <div class="form-group">
+                  <label for="id">id:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="id"
+                     name="id"
+                     placeholder="Ingrese el id del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="proveedor">Seleccione un proveedor:</label>
+                  <select class="form-control" id="proveedor" name="proveedor" required>
+                     <option value="">Nada</option>
+                     {{#each proveedor}}
+                        <option value="{{id}}">{{nombre}} {{apellido}}</option>
+                     {{/each}}
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="producto">Seleccione un producto:</label>
+                  <select class="form-control" id="producto" name="producto" required>
+                     <option value="">Nada</option>
+                     {{#each producto}}
+                        <option value="{{id}}">{{nombre}}</option>
+                     {{/each}}
+                  </select>
+               </div>
+               <div class="form-group">
+                  <input type="submit" class="btn btn-success btn-block" value="Guardar">
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

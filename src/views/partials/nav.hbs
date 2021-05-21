@@ -5,11 +5,26 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="/productos" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Lista
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/productos">Muebles</a>
+          <a class="dropdown-item" href="/productos/color">Colores</a>
+          <a class="dropdown-item" href="/productos/categoria">Categorias</a>
+          <a class="dropdown-item" href="/productos/material">Materiales</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Provedor-Productos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/proveedores">Proveedores</a>
+          <a class="dropdown-item" href="/Proveedores/producto">Proveedor-Producto</a>
+          <a class="dropdown-item" href="#">Categorias</a>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>

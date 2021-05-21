@@ -1,0 +1,139 @@
+
+<div class="row">
+   <div class="col-md-8 mx-auto">
+      <h2> Nuevo Proveedor</h2>
+      <div class="card p-2 shadow-lg bg-white rounded">
+         <div class="card-body">
+            <form action="/proveedores/edit/{{proveedor.id}}" method="POST">
+               <div class="form-group">
+                  <label for="id">id:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="id"
+                     name="id"
+                     value="{{proveedor.id}}"
+                     placeholder="Ingrese el id del proveedor"
+                     disabled
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="nombre">nombre:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="nombre"
+                     value="{{proveedor.nombre}}"
+                     name="nombre"
+                     placeholder="Ingrese el el nombre del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="apellido">apellido:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="apellido"
+                     name="apellido"
+                     value="{{proveedor.apellido}}"
+                     placeholder="Ingrese el apellido del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="empresa">empresa:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="empresa"
+                     name="empresa"
+                     value="{{proveedor.empresa}}"
+                     placeholder="Ingrese el empresa del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="categoria">Seleccione el estado:</label>
+                  <select class="form-control" id="estado" name="estado" onchange="getMunicipios()" required>
+                     <option value="{{ estadoId.id }}">{{ estadoId.clave }} - {{ estadoId.nombre }}</option>
+                     {{#each estadoAll}}
+                        <option value="{{id}}">{{clave}} - {{nombre}}</option>
+                     {{/each}}
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="municipio">Seleccione un municipio:</label>
+                  <select class="form-control" id="municipios" name="municipios" required>
+                     <option value="{{municipioId.id}}">{{municipioId.clave}} - {{municipioId.nombre}}</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="colonia">colonia:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="colonia"
+                     name="colonia"
+                     value="{{proveedor.colonia}}"
+                     placeholder="Ingrese la colonia del proveedpr"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="calle">calle:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="calle"
+                     name="calle"
+                     value="{{proveedor.calle}}"
+                     placeholder="Ingrese la calle del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="codigo Postal">codigo Postal:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="codigoPostal"
+                     name="codigoPostal"
+                     value="{{proveedor.codigo_postal}}"
+                     placeholder="Ingrese la codigo Postal del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="num. exteriro">num. exteriro:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="numExterior"
+                     name="numExterior"
+                     value="{{proveedor.num_exterior}}"
+                     placeholder="Ingrese la num. exteriro del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <label for="telefono">telefono:</label>
+                  <input
+                     type="text"
+                     class="form-control"
+                     id="telefono"
+                     name="telefono"
+                     value="{{proveedor.telefono}}"
+                     placeholder="Ingrese la telefono del proveedor"
+                     required
+                  />
+               </div>
+               <div class="form-group">
+                  <input type="submit" class="btn btn-success btn-block" value="Guardar">
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

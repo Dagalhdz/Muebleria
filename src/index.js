@@ -2,10 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 
 //Inicializacion
 const app = express();
+const sessionStore = new session.MemoryStore;
 
 // settings
 app.set('port', process.env.Port || 3000);
@@ -23,19 +26,30 @@ app.engine('hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // Middlewares
-app.use(cookieParser('secretmeubleria'));
-app.use(session({cookie: { maxAge: 60000 }}));
+app.use(cookieParser('secretMuebleria'));
+app.use(session({
+   cookie: {maxAge: 60000},
+   store: sessionStore,
+   saveUninitialized: true,
+   resave: 'true',
+   secret: 'secretMuebleria'
+}))
 app.use(flash())
+
 app.use(morgan('dev'))
 app.use(express.urlencoded({extended: false}));
 
 // Variables Globales
-
+app.use((req, res, next) => {
+   app.locals.sessionFlash = req.session.sessionFlash;
+   delete req.session.sessionFlash;
+   next()
+})
 
 // Routes
 app.use(require('./routes'));
 app.use(require('./routes/admin/auth'));
-app.use(require('./routes/admin/Proveedores'));
+app.use('/proveedores' ,require('./routes/admin/Proveedores'));
 app.use('/productos', require('./routes/admin/Productos'));
 
 // public

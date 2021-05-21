@@ -8,8 +8,7 @@ router.get('/', async (req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
       .execute('procedure_getAllProducts');
-   // console.log(result.recordset);
-   res.render('body/productos/list', {productos: result.recordset});
+   res.render('body/productos/list', {productos: result.recordset, success: req.flash('success')});
 })
 
 router.get('/add', async(req, res) => {
@@ -20,7 +19,6 @@ router.get('/add', async(req, res) => {
       .query('SELECT * FROM Materiales');
    const resultCategoria = await pool.request()
       .query('SELECT * FROM Categorias_Productos');
-   console.log(resultColor.recordset)
    res.render('body/productos/add', {color: resultColor.recordset, material: resultMaterial.recordset, categoria: resultCategoria.recordset});
 })
 
@@ -38,7 +36,7 @@ router.post('/add', async (req, res) => {
          .input('existencia', existencia)
          .input('descripcion', description)
          .execute('procedure_newProducto');
-      req.flash('sucess', 'Se ha agregado el producto Correctamente')
+      req.flash('success', 'Se ha agregado el producto Correctamente')
       res.redirect('/productos', )
    }
    catch (error){
@@ -52,7 +50,7 @@ router.get('/delete/:id', async (req, res) => {
    const result = await pool.request()
       .input('id', id)
       .execute('procedure_DeleteProductById');
-   req.flash('sucess', 'Se ha aliminado el producto Correctamente');
+   req.flash('success', 'Se ha eliminado el producto Correctamente');
    res.redirect('/productos');
 })
 
@@ -99,7 +97,7 @@ router.post('/edit/:id', async (req, res) => {
          .input('existencia', existencia)
          .input('descripcion', description)
          .execute('procedure_UpdateProduct');
-         req.flash('sucess', 'Se ha Editado el producto Correctamente');
+      req.flash('success', 'Se ha Editado el producto Correctamente');
       res.redirect('/productos', )
    }
     catch (error){
@@ -111,7 +109,7 @@ router.get('/color', async(req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
       .query('SELECT * FROM Colores');
-   res.render('body/productos/color/list', {colores: result.recordset})
+   res.render('body/productos/color/list', {colores: result.recordset, success: req.flash('success')})
 })
 
 router.get('/color/add', (req, res) => {
@@ -124,6 +122,7 @@ router.post('/color/add', async (req, res) => {
    const result = await pool.request()
       .input('color', sql.VarChar, color)
       .query(`INSERT INTO Colores (color) VALUES (@color)`)
+      req.flash('success', 'Se ha Agregado el color Correctamente');
    res.redirect('/productos/color')
 })
 
@@ -133,6 +132,7 @@ router.get('/color/delete/:id', async(req, res) =>{
    const result = await pool.request()
       .input('id', id)
       .execute('procedure_DeleteColorById');
+      req.flash('success', 'Se ha Eliminado el color Correctamente');
    res.redirect('/productos/color');
 })
 
@@ -154,6 +154,7 @@ router.post('/color/edit/:id', async(req,res) => {
       .input('id', id)
       .input('color', color)
       .execute('procedure_UpdateColor');
+      req.flash('success', 'Se ha Editado el color Correctamente');
    res.redirect('/productos/color')
 })
 
@@ -161,7 +162,7 @@ router.get('/material', async(req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
       .query('SELECT * FROM Materiales');
-   res.render('body/productos/material/list', {material: result.recordset})
+   res.render('body/productos/material/list', {material: result.recordset, success: req.flash('success')})
 })
 
 router.get('/material/add', (req, res) => {
@@ -175,6 +176,7 @@ router.post('/material/add', async(req, res) => {
       .input('material', material)
       .input('descripcion', description)
       .execute('procedure_newMaterial');
+      req.flash('success', 'Se ha Agregado el material Correctamente');
    res.redirect('/productos/material');
 })
 
@@ -184,6 +186,7 @@ router.get('/material/delete/:id', async(req, res) => {
    const result = await pool.request()
       .input('id', id)
       .execute('procedure_DeleteMaterialtById')
+      req.flash('success', 'Se ha Eliminado el Material Correctamente');
    res.redirect('/productos/material');
 })
 
@@ -211,7 +214,7 @@ router.get('/categoria', async(req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
       .query('SELECT * FROM Categorias_Productos');
-   res.render('body/productos/categoria/list', {categoria: result.recordset})
+   res.render('body/productos/categoria/list', {categoria: result.recordset, success: req.flash('success')})
 })
 
 router.get('/categoria/add', (req, res) => {
@@ -225,6 +228,7 @@ router.post('/categoria/add', async(req, res) => {
       .input('categoria', categoria)
       .input('descripcion', description)
       .execute('procedure_newCategoria');
+      req.flash('success', 'Se ha Agregado la categoria Correctamente');
    res.redirect('/productos/categoria');
 })
 
@@ -234,6 +238,7 @@ router.get('/categoria/delete/:id', async(req, res) => {
    const result = await pool.request()
       .input('id', id)
       .execute('procedure_DeleteCategoriaById')
+      req.flash('success', 'Se ha Eliminado la Categoria Correctamente');
    res.redirect('/productos/categoria');
 })
 
@@ -254,6 +259,7 @@ router.post('/categoria/edit/:id', async(req, res) => {
       .input('categoria', categoria)
       .input('descripcion', description)
       .execute('procedure_UpdateCategoria');
+      req.flash('success', 'Se ha Editado correctamente Correctamente');
    res.redirect('/productos/categoria');
 })
 
