@@ -142,7 +142,6 @@ router.get('/color/edit/:id', async(req, res) =>{
    const result = await pool.request()
       .input('id', id)
       .execute('procedure_GetColorById');
-   console.log(result.recordset);
    res.render('body/productos/color/edit', {color: result.recordset[0]})
 })
 

@@ -88,14 +88,6 @@ router.post('/edit/:id', async (req, res) => {
    res.redirect('/proveedores');
 });
 
-router.get('/municipios/:id', async (req, res) => {
-   const { id } = req.params;
-   const pool = await poolPromise;
-   const result = await pool.request()
-      .query(`SELECT id, clave, nombre FROM municipios WHERE estado_id = ${id}`);
-   res.send(result.recordset)
-});
-
 router.get('/producto', async(req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
@@ -151,7 +143,6 @@ router.get('/producto/edit/:id', async(req, res) => {
 
    const resultProdAll = await pool.request()
       .query(`SELECT id, nombre FROM Productos WHERE id != ${result.recordset[0].id_Producto}`)
-      console.log(resultProdAll.recordset)
 
    res.render('body/proveedores/producto/edit', {result: result.recordset[0], provId: resultProvId.recordset[0], provAll: resultProvAll.recordset, prodId: resultProdId.recordset[0], prodAll: resultProdAll.recordset})
 })
@@ -168,4 +159,96 @@ router.post('/producto/edit/:id', async(req, res) => {
    req.flash('success', 'Se ha Modificado un proveedor-producto correctamente');
    res.redirect('/proveedores/producto');
 });
+
+router.get('/compra', async(req, res) => {
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .execute('procedure_getAllOrden_Compra');
+   res.render('body/proveedores/compra/list', {compra: result.recordset, success: req.flash('success')})
+})
+
+router.get('/compra/delete/:id', async(req, res) => {
+   const { id } = req.params;
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .query(`DELETE FROM  Orden_Compra WHERE id = ${id}`);
+   req.flash('success', 'Se ha Eliminado una orden de compra correctamente');
+   res.redirect('/proveedores/compra');
+})
+
+router.get('/compra/add', async(req, res) => {
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .execute('procedure_GetAllProveedor_Producto');
+   console.log(result.recordset);
+   res.render('body/proveedores/compra/add', {result: result.recordset});
+})
+
+router.post('/compra/add', async(req, res) => {
+   const { id, prod_prov, cantidad, subtotal, total} = req.body;
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .input('id', id)
+      .input('id_proveedor_compra', prod_prov)
+      .input('cantida', cantidad)
+      .input('subtotal', subtotal)
+      .input('total', total)
+      .execute('procedure_newOrdenCompra');
+   req.flash('success', 'Se ha Agregado una orden de compra correctamente');
+   res.redirect('/proveedores/compra');
+})
+
+router.get('/compra/edit/:id', async(req, res) => {
+   const { id } = req.params;
+   const pool = await poolPromise;
+
+   const resultOrdenId = await pool.request()
+      .query(`SELECT id, id_proveedor_compra, cantidad, sub_total, total FROM Orden_Compra WHERE id = ${id}`)
+   
+   const provCompraAll = await pool.request()
+      .input('id', resultOrdenId.recordset[0].id_proveedor_compra)
+      .execute('procedure_getExeptOrden_Compra');
+
+   const provCompraId = await pool.request()
+      .input('id', resultOrdenId.recordset[0].id_proveedor_compra)
+      .execute('procedure_getOrden_CompraById')
+
+   res.render('body/proveedores/compra/edit', {ordenId: resultOrdenId.recordset[0], provCompraId: provCompraId.recordset[0], provCompraAll: provCompraAll.recordset})
+})
+
+router.post('/compra/edit/:id', async(req, res) => {
+   const { id } = req.params;
+   const { prod_prov, cantidad, subtotal, total } = req.body;
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .input('id', id)
+      .input('id_proveedor_compra', prod_prov)
+      .input('cantida', cantidad)
+      .input('subtotal', subtotal)
+      .input('total', total)
+      .execute('procedure_UpdateOrdenCompra')
+   req.flash('success', 'Se ha Editado una orden de compra correctamente');
+   res.redirect('/proveedores/compra');
+})
+
+
+/* Rutas que solo envuan datos */
+router.get('/municipios/:id', async (req, res) => {
+   const { id } = req.params;
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .query(`SELECT id, clave, nombre FROM municipios WHERE estado_id = ${id}`);
+   res.send(result.recordset)
+});
+
+router.get('/compra/precio/:id', async(req, res) => {
+   const { id } = req.params
+   const pool = await poolPromise;
+   const result = await pool.request()
+      .input('id', id)
+      .execute('procedure_GetAllProveedor_ProductoById')
+   res.send(result.recordset)
+})
+
+
 module.exports = router;
