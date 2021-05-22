@@ -1,9 +1,9 @@
 <div class="row">
    <div class="col-md-8 mx-auto">
-      <h2> Editar Material</h2>
+      <h2> Editar Color</h2>
       <div class="card p-2 shadow-lg bg-white rounded">
          <div class="card-body">
-            <form action="/Productos/material/edit/{{material.id}}" method="POST">
+            <form action="/Productos/color/edit/{{color.id}}" method="POST">
                <div class="form-group">
                   <label for="id">id:</label>
                   <input
@@ -11,34 +11,23 @@
                      class="form-control"
                      id="id"
                      name="id"
-                     value="{{material.id}}"
-                     placeholder="Ingrese el id del material"
+                     value="{{color.id}}"
+                     placeholder="Ingrese el id del color"
                      required
                      disabled
                   />
                </div>
                <div class="form-group">
-                  <label for="material">material:</label>
+                  <label for="color">color:</label>
                   <input
                      type="text"
                      class="form-control"
-                     id="material"
-                     name="material"
-                     value="{{material.material}}"
-                     placeholder="Ingrese el nombre del material"
+                     id="color"
+                     name="color"
+                     value="{{color.color}}"
+                     placeholder="Ingrese el nombre del color"
                      required
                   />
-               </div>
-               <div class="form-group">
-                  <label for="description">description:</label>
-                  <textarea
-                     class="form-control"
-                     id="description"
-                     rows="3"
-                     maxlength="100"
-                     name="description"
-                     required
-                  >{{material.descripcion}}</textarea>
                </div>
                <div class="form-group">
                   <input type="submit" class="btn btn-success btn-block" value="Guardar">

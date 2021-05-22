@@ -51,6 +51,7 @@ app.use(require('./routes'));
 app.use(require('./routes/admin/auth'));
 app.use('/proveedores' ,require('./routes/admin/Proveedores'));
 app.use('/productos', require('./routes/admin/Productos'));
+app.use('/empleados', require('./routes/admin/Empleados'));
 
 // public
 app.use(express.static(path.join(__dirname, 'public')));

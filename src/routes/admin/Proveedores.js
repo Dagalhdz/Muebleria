@@ -62,8 +62,6 @@ router.get('/edit/:id', async(req, res) => {
    const resultIdMunicipio = await pool.request()
       .query(`SELECT id, clave, nombre FROM municipios WHERE id = ${resultProveedor.recordset[0].id_municipio}`);
    
-   console.log(resultAllEstado.recordset);
-   
    res.render('body/proveedores/edit', {proveedor: resultProveedor.recordset[0], estadoId: resultEstadoId.recordset[0], estadoAll: resultAllEstado.recordset, municipioId: resultIdMunicipio.recordset[0] })
 });
 

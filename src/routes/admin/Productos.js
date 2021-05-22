@@ -1,7 +1,4 @@
-const {request, Router} =require('express')
 const router = require('express').Router();
-
-const { route } = require('..');
 const { sql, poolPromise} = require('../../config/database');
 
 router.get('/', async (req, res) => {
@@ -37,7 +34,7 @@ router.post('/add', async (req, res) => {
          .input('descripcion', description)
          .execute('procedure_newProducto');
       req.flash('success', 'Se ha agregado el producto Correctamente')
-      res.redirect('/productos', )
+      res.redirect('/productos')
    }
    catch (error){
       console.log(error)

@@ -1,10 +1,10 @@
 
 <div class="row">
    <div class="col-md-8 mx-auto">
-      <h2> Nuevo Proveedor</h2>
+      <h2> Editar Empleado</h2>
       <div class="card p-2 shadow-lg bg-white rounded">
          <div class="card-body">
-            <form action="/proveedores/add" method="POST">
+            <form action="/empleados/edit/{{empleado.id}}" method="POST">
                <div class="form-group">
                   <label for="id">id:</label>
                   <input
@@ -13,7 +13,9 @@
                      class="form-control"
                      id="id"
                      name="id"
-                     placeholder="Ingrese el id del proveedor"
+                     value="{{empleado.id}}"
+                     placeholder="Ingrese el id del empleado"
+                     readonly
                      required
                   />
                </div>
@@ -24,7 +26,8 @@
                      class="form-control"
                      id="nombre"
                      name="nombre"
-                     placeholder="Ingrese el el nombre del proveedor"
+                     value="{{empleado.nombre}}"
+                     placeholder="Ingrese el el nombre del empleado"
                      required
                   />
                </div>
@@ -35,26 +38,62 @@
                      class="form-control"
                      id="apellido"
                      name="apellido"
-                     placeholder="Ingrese el apellido del proveedor"
+                     value="{{empleado.apellido}}"
+                     placeholder="Ingrese el apellido del empleado"
                      required
                   />
                </div>
                <div class="form-group">
-                  <label for="empresa">empresa:</label>
+                  <label for="email">email:</label>
                   <input
-                     type="text"
+                     type="email"
                      class="form-control"
-                     id="empresa"
-                     name="empresa"
-                     placeholder="Ingrese el empresa del proveedor"
+                     id="email"
+                     name="email"
+                     value="{{empleado.email}}"
+                     placeholder="Ingrese el email del empleado"
                      required
                   />
                </div>
+               <div class="form-group">
+                  <label for="categoria">Seleccione el sexo:</label>
+                  <select class="form-control" id="sexo" name="sexo" required>
+                     <option value="">Nada</option>
+                     <option value="M">Masculino</option>
+                     <option value="F">Femenino</option>
+                     <option value="O">Otro</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="fecha_nac">fecha_nac:</label>
+                  <input
+                     type="date"
+                     min="01/01/1950"
+                     mix="01/01/2003"
+                     class="form-control"
+                     id="fecha_nac"
+                     name="fecha_nac"
+                     value="{{fecha_nac}}"
+                     placeholder="Ingrese el fecha de nacimiento del empleado"
+                     required
+                  />
+               </div>
+
+               <div class="form-group">
+                  <label for="categoria">Seleccione el puesto:</label>
+                  <select class="form-control" id="puesto" name="puesto" onchange="getMunicipios()" required>
+                     <option value="{{puestoId.id}}">{{puestoId.nombre}}</option>
+                     {{#each puestoAll}}
+                        <option value="{{id}}">{{nombre}}</option>
+                     {{/each}}
+                  </select>
+               </div>
+               
                <div class="form-group">
                   <label for="categoria">Seleccione el estado:</label>
                   <select class="form-control" id="estado" name="estado" onchange="getMunicipios()" required>
-                     <option value="">Nada</option>
-                     {{#each estados}}
+                     <option value="{{estadoId.id}}">{{estadoId.clave}} - {{estadoId.nombre}}</option>
+                     {{#each estadosAll}}
                      <option value="{{id}}">{{clave}} - {{nombre}}</option>
                      {{/each}}
                   </select>
@@ -62,7 +101,7 @@
                <div class="form-group">
                   <label for="municipio">Seleccione un municipio:</label>
                   <select class="form-control" id="municipios" name="municipios" required>
-                     <option value="">Nada</option>
+                     <option value="{{municipioId.id}}">{{municipioId.clave}} - {{municipioId.nombre}}</option>
                   </select>
                </div>
                <div class="form-group">
@@ -72,6 +111,7 @@
                      class="form-control"
                      id="colonia"
                      name="colonia"
+                     value="{{empleado.colonia}}"
                      placeholder="Ingrese la colonia del proveedpr"
                      required
                   />
@@ -83,7 +123,8 @@
                      class="form-control"
                      id="calle"
                      name="calle"
-                     placeholder="Ingrese la calle del proveedor"
+                     value="{{empleado.calle}}"
+                     placeholder="Ingrese la calle del empleado"
                      required
                   />
                </div>
@@ -95,7 +136,8 @@
                      class="form-control"
                      id="codigoPostal"
                      name="codigoPostal"
-                     placeholder="Ingrese la codigo Postal del proveedor"
+                     value="{{empleado.codigo_postal}}"
+                     placeholder="Ingrese la codigo Postal del empleado"
                      required
                   />
                </div>
@@ -107,7 +149,8 @@
                      class="form-control"
                      id="numExterior"
                      name="numExterior"
-                     placeholder="Ingrese la num. exteriro del proveedor"
+                     value="{{empleado.num_exterior}}"
+                     placeholder="Ingrese la num. exteriro del empleado"
                      required
                   />
                </div>
@@ -118,7 +161,8 @@
                      class="form-control"
                      id="telefono"
                      name="telefono"
-                     placeholder="Ingrese la telefono del proveedor"
+                     value="{{empleado.telefono}}"
+                     placeholder="Ingrese la telefono del empleado"
                      required
                   />
                </div>

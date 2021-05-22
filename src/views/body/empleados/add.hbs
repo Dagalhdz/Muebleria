@@ -1,10 +1,10 @@
 
 <div class="row">
    <div class="col-md-8 mx-auto">
-      <h2> Nuevo Proveedor</h2>
+      <h2> Nuevo Empleado</h2>
       <div class="card p-2 shadow-lg bg-white rounded">
          <div class="card-body">
-            <form action="/proveedores/add" method="POST">
+            <form action="/empleados/add" method="POST">
                <div class="form-group">
                   <label for="id">id:</label>
                   <input
@@ -40,16 +40,49 @@
                   />
                </div>
                <div class="form-group">
-                  <label for="empresa">empresa:</label>
+                  <label for="email">email:</label>
                   <input
-                     type="text"
+                     type="email"
                      class="form-control"
-                     id="empresa"
-                     name="empresa"
-                     placeholder="Ingrese el empresa del proveedor"
+                     id="email"
+                     name="email"
+                     placeholder="Ingrese el email del proveedor"
                      required
                   />
                </div>
+               <div class="form-group">
+                  <label for="categoria">Seleccione el sexo:</label>
+                  <select class="form-control" id="sexo" name="sexo" required>
+                     <option value="">Nada</option>
+                     <option value="M">Masculino</option>
+                     <option value="F">Femenino</option>
+                     <option value="O">Otro</option>
+                  </select>
+               </div>
+               <div class="form-group">
+                  <label for="fecha_nac">fecha_nac:</label>
+                  <input
+                     type="date"
+                     min="01/01/1950"
+                     mix="01/01/2003"
+                     class="form-control"
+                     id="fecha_nac"
+                     name="fecha_nac"
+                     placeholder="Ingrese el fecha de nacimiento del proveedor"
+                     required
+                  />
+               </div>
+
+               <div class="form-group">
+                  <label for="categoria">Seleccione el puesto:</label>
+                  <select class="form-control" id="puesto" name="puesto" onchange="getMunicipios()" required>
+                     <option value="">Nada</option>
+                     {{#each puestos}}
+                        <option value="{{id}}">{{nombre}}</option>
+                     {{/each}}
+                  </select>
+               </div>
+               
                <div class="form-group">
                   <label for="categoria">Seleccione el estado:</label>
                   <select class="form-control" id="estado" name="estado" onchange="getMunicipios()" required>
