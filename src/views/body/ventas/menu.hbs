@@ -1,0 +1,154 @@
+<div class="container p-4">
+   <div class="row">
+      <div class="col-md-8 mx-auto">
+         <h2> Venta</h2>
+         <div class="card">
+            <div class="card-body">
+               <form action="#" method="POST">
+                  <div class="form-group">
+                     <label for="cantidad">id:</label>
+                     <input
+                        type="number"
+                        min="1"
+                        class="form-control"
+                        id="id"
+                        name="id"
+                        placeholder="Ingrese la id de la venta"
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="categoria">Agregar producto:</label>
+                     <select
+                        class="form-control"
+                        id="prducto"
+                        name="producto"
+                        onchange="calcularTotalVentas()"
+                        required
+                     >
+                        <option value="">Nada</option>
+                        {{#each productos}}
+                           <option value="{{id}}">{{nombre}}</option>
+                        {{/each}}
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <label for="cantidad">cantidad:</label>
+                     <input
+                        type="number"
+                        min="1"
+                        class="form-control"
+                        id="cantidad"
+                        name="cantidad"
+                        oninput="calcularTotalVentas()"
+                        placeholder="Ingrese la canitdad vendida"
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="subtotal">subtotal:</label>
+                     <input
+                        type="number"
+                        class="form-control"
+                        id="subtotal"
+                        name="subtotal"
+                        value="0"
+                        readonly
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="descuento">descuento:</label>
+                     <input
+                        type="number"
+                        min="0"
+                        max="50"
+                        class="form-control"
+                        id="descuento"
+                        oninput="calcularTotalVentas()"
+                        name="descuento"
+                        value="0"
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="total">total:</label>
+                     <input
+                        type="number"
+                        class="form-control"
+                        id="total"
+                        name="total"
+                        value="0"
+                        readonly
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <button
+                        class="btn btn-success btn-block"
+                        type="button"
+                        value="add"
+                        onclick="addProd()"
+                     >Agregar</button>
+                  </div>
+                  <div class="form-group">
+                     <h3>Agregar Ticket</h3>
+                  </div>
+                  <div class="form-group">
+                     <label for="id">id:</label>
+                     <input
+                        type="number"
+                        min="1"
+                        class="form-control"
+                        id="id"
+                        name="id"
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="nombre">Nombre Cliente(opcional):</label>
+                     <input
+                        type="text"
+                        min="1"
+                        class="form-control"
+                        id="nombre"
+                        value=" "
+                        name="nombre"
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <label for="apellido">Apellido Cliente(opcional):</label>
+                     <input
+                        type="text"
+                        min="1"
+                        class="form-control"
+                        id="apellido"
+                        name="apellido"
+                        value=" "
+                        required
+                     />
+                  </div>
+                  <div class="form-group">
+                     <button
+                        class="btn btn-success btn-block"
+                        type="button"
+                        id="factura"
+                        value="add"
+                        onclick="addFactura()"
+                     >Agregar Factura</button>
+                  </div>
+                  <div class="form-group">
+                     <button
+                        class="btn btn-success btn-block"
+                        type="button"
+                        value="add"
+                        onclick="sendVenta()"
+                     >Realizar Compra</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

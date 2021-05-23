@@ -1,0 +1,58 @@
+<div class="container p-4">
+   <div class="row">
+      <div class="col-md-4 mx-auto">
+         <div class="card">
+            <div class="card-header  text-center">
+               <h3>Signup</h3>
+            </div>
+               <div class="card-body">
+                  <form action="/signup" method="POST">
+                     <div class="form-group">
+                        <label for="categoria">Seleccione un cajero:</label>
+                        <select class="form-control" id="cajero" name="cajero" required>
+                           <option value="">Nada</option>
+                           {{#each cajero}}
+                              <option value="{{id}}">{{id}} - {{nombre}}</option>
+                           {{/each}}
+                        </select>
+                     </div> 
+                     <div class="form-group">
+                        <label for="username">username:</label>
+                        <input
+                           type="text"
+                           class="form-control"
+                           id="username"
+                           name="username"
+                           placeholder="Ingrese el username"
+                           required
+                        />
+                     </div>
+                     <div class="form-group">
+                        <label for="password">password:</label>
+                        <input
+                           type="text"
+                           class="form-control"
+                           id="password"
+                           name="password"
+                           placeholder="Ingrese el un password"
+                           required
+                        />
+                     </div>
+                     <div class="form-group">
+                        <label for="categoria">Seleccione un rol:</label>
+                        <select class="form-control" id="rol" name="rol" required>
+                           <option value="">Nada</option>
+                           <option value="1">User</option>
+                           <option value="2">Admin</option>
+                           
+                        </select>
+                     </div> 
+                     <div class="form-group">
+                        <input type="submit" class="btn btn-success btn-block" value="Save">
+                     </div>
+                  </form>
+               </div>
+         </div>
+      </div>
+   </div>
+</div>
