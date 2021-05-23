@@ -31,10 +31,9 @@ app.set('view engine', '.hbs');
 // Middlewares
 app.use(cookieParser('secretMuebleria'));
 app.use(session({
-   cookie: {maxAge: 60000},
    store: sessionStore,
-   saveUninitialized: true,
-   resave: 'true',
+   saveUninitialized: false,
+   resave: false,
    secret: 'secretMuebleria'
 }))
 app.use(flash());
