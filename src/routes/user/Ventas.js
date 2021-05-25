@@ -6,17 +6,23 @@ router.get('/', async(req, res) => {
    const pool = await poolPromise;
    const result = await pool.request()
       .query('SELECT * FROM Productos')
-   // console.log(result.recordset);
-   console.log('Here')
-   console.log(req.user)
    res.render('body/ventas/menu', {productos: result.recordset})
 })
 
 router.post('/', async(req, res) => {
    const { producto, factura} = req.body
    const pool = await poolPromise;
+
+   // console.log(producto)
+   // console.log(factura)
+
+   const result = await pool.request()
+      .input('id', factura.id)
+      .input('nombre', factura.nombre)
+      .input('apellido', factura.apellido)
+      .execute('procedure_NewFactura')
+
    producto.map(async(data) => {
-      // console.log(data.id)
       const result = await pool.request()
          .input('id', data.id)
          .input('inicio_sesion', req.user.id)
@@ -32,13 +38,7 @@ router.post('/', async(req, res) => {
          .input('id_factura', factura.id)
          .execute('procedure_NewDetalleVenta')
    })
-
-   const result = await pool.request()
-      .input('id', factura.id)
-      .input('nombre', factura.nombre)
-      .input('apellido', factura.apellido)
-      .execute('procedure_NewFactura')
-   res.render('/body/ventas/menu')
+   res.redirect('/ventas')
 })
 
 router.get('/lista', async( req, res) => {
