@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {sql, poolPromise} = require('../../config/database');
 const passport = require('passport');
-const { isLoggedIn, isAdmin } = require('../../libs/auth');
+const { isLoggedIn, isAdmin, isNotLoggedIn } = require('../../libs/auth');
 
 router.get('/signup', isLoggedIn, isAdmin, async(req, res) =>{
    const pool = await poolPromise;
@@ -17,7 +17,7 @@ router.post('/signup', passport.authenticate('local.signup', {
    failureFlash: true
 }));
 
-router.get('/signin', (req, res) => {
+router.get('/signin', isNotLoggedIn, (req, res) => {
    res.render('body/auth/signin', {msg: req.flash('msg')});
 });
 
